@@ -20,7 +20,7 @@ import * as yup from 'yup';
 const { login } = AuthActions;
 const loginValidationSchema = yup.object().shape({
   user: yup.string().email('Please enter a valid email').required('Email Address is Required'),
-  password: yup.string()
+  password: yup.string().required('Password is required')
 });
 
 const successInit = {

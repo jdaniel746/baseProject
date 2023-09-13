@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import styles from './styles';
 import { useTranslation } from 'react-i18next';
+import { firestore } from '../config/firebase';
 
 const ProfileEdit = (props) => {
   const { navigation } = props;

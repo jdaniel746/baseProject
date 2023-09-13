@@ -8,7 +8,7 @@ import {
   Tag,
   Text
 } from '@components';
-import { BaseStyle, useTheme } from '@config';
+import { BaseStyle, useTheme, Images } from '@config';
 // Load sample data
 import { UserData } from '@data';
 import React, { useState } from 'react';
@@ -61,7 +61,7 @@ const Profile = (props) => {
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}>
                 <ProfileDetail
-                  image={user?.avatar}
+                  image={user.avatar}
                   textFirst={user?.fullName}
                   point={userData.point}
                   textSecond={userData.address}

@@ -5,8 +5,9 @@ export const BaseSetting = {
   name: 'mazi',
   displayName: 'Mazi',
   appVersion: '1.0.5',
-  defaultLanguage: 'en',
+  defaultLanguage: 'es',
   languageSupport: [
+    'es',
     'en',
     'vi',
     'ar',
@@ -26,6 +27,9 @@ export const BaseSetting = {
     'ku'
   ],
   resourcesLanguage: {
+    es: {
+      translation: require('../lang/es.json')
+    },
     en: {
       translation: require('../lang/en.json')
     },

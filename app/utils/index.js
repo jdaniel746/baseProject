@@ -85,6 +85,8 @@ export const scrollEnabled = (contentWidth, contentHeight) => {
 
 export const languageFromCode = (code) => {
   switch (code) {
+    case 'es':
+      return 'Español';
     case 'en':
       return 'English';
     case 'vi':

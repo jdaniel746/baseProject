@@ -1,11 +1,12 @@
 import Icon from '@components/Icon';
 import Image from '@components/Image';
 import Text from '@components/Text';
-import { BaseColor, useTheme } from '@config';
+import { BaseColor, useTheme, Images } from '@config';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import styles from './styles';
+import {doc} from 'firebase/firestore';
 
 export default function ProfileDetail(props) {
   const { colors } = useTheme();
@@ -22,11 +23,16 @@ export default function ProfileDetail(props) {
     textThird,
     icon
   } = props;
+
   return (
     <TouchableOpacity style={[styles.contain, style]} onPress={onPress} activeOpacity={0.9}>
       <View style={[styles.contentLeft, styleLeft]}>
         <View>
-          <Image source={{ uri: image}} style={[styles.thumb, styleThumb]} />
+          {image ? (
+            <Image source={{ uri: image }} style={[styles.thumb, styleThumb]} />
+          ) : (
+            <Image source={Images.profile2} style={[styles.thumb, styleThumb]} />
+          )}
           <View style={[styles.point, { backgroundColor: colors.primaryLight }]}>
             <Text overline whiteColor semibold>
               {point}

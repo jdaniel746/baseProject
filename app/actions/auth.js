@@ -48,7 +48,7 @@ export const login = (login, callback) => async (dispatch) => {
       console.log(userDataNew);
 
       let data = {
-        user: { lang: 'en', ...userDataNew }
+        user: { lang: 'es', ...userDataNew }
       };
 
       dispatch(onLoginSuccess(data));
@@ -59,29 +59,46 @@ export const login = (login, callback) => async (dispatch) => {
       }
     });
   } catch (e) {
+    callback({ success: false });
     console.log('ERROR: ' + e);
   }
 };
 
 export const register = (user, callback) => async (dispatch) => {
   try {
-    const response = await createUserWithEmailAndPassword(auth, user.user, user.password);
+    console.log("values:"+JSON.stringify(user))
+    const response = await createUserWithEmailAndPassword(auth, user.email, user.password);
+    console.log("response "+response)
     const { uid } = response.user;
-    const data = {
+    const user_ = {
       id: uid,
-      email: user.user,
-      fullName: user.fullName,
-      avatar: ''
+      email: user.email,
+      fullName: user.firstname + ' ' + user.lastname,
+      avatar: '',
+      personId: uid
     };
+    const person_ = {
+      firstname: user.firstname,
+      middlename: '',
+      lastname: user.lastname,
+      surname: '',
+      phone: '',
+      address: '',
+      birthdate: '',
+      invitedBy: ''
+    };
+    const personRef = doc(firestore, 'persona', uid);
+    await setDoc(personRef, person_);
     const usersRef = doc(firestore, 'users', uid);
-    await setDoc(usersRef, data);
+    await setDoc(usersRef, user_);
 
-    dispatch(onRegister(data));
+    dispatch(onRegister(user_));
     if (typeof callback === 'function') {
       callback({ success: true });
     }
   } catch (e) {
     console.log('ERROR: ' + e);
+    callback({ success: false });
   }
 };
 
